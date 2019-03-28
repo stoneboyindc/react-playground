@@ -8,18 +8,30 @@ class Tabs extends React.Component {
     state = {
         currentTabIndex: 0
     };
+    /* Below code is incorrect, but why??  */
+    // renderButtons() {
+    //     return this.props.tabs.map((tab, index) => (
+    //         <button key={index} onClick={this.handleButtonClick(index)}>
+    //             {tab.name}
+    //         </button>
+    //     ))
+    // }
+    // handleButtonClick = (index) => {
+    //     console.log('button clicked!', { index })
+    // }
+
+    handleButtonClick(index) {
+        console.log('button clicked!', { index });
+        this.setState({ currentTabIndex: index })
+    }
 
     renderButtons() {
         return this.props.tabs.map((tab, index) => (
-            <button key={index} onClick={this.handleButtonClick}>
+            <button key={index} onClick={() => this.handleButtonClick(index)}>
                 {tab.name}
             </button>
         ))
     }
-    handleButtonClick = () => {
-        console.log('button clicked!')
-    }
-
     renderContent() {
         const currentTab = this.props.tabs[this.state.currentTabIndex]
         return (
