@@ -1,9 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import renderer from 'react-test-renderer';
-import { shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
-import Tabs from './Tabs';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
+import Tabs from './Tabs'
 
 describe(`Tabs Component`, () => {
     it('renders without errors', () => {
@@ -27,13 +26,29 @@ describe(`Tabs Component`, () => {
         },
     ];
 
+    // it('renders the first tab by default', () => {
+    //     const tree = renderer.create(<Tabs tabs={tabsProp} />).toJSON()
+    //     expect(tree).toMatchSnapshot()
+    // })
+
     it('renders the first tab by default', () => {
-        const tree = renderer.create(<Tabs tabs={tabsProp} />).toJSON()
-        expect(tree).toMatchSnapshot()
+        const wrapper = shallow(<Tabs tabs={tabsProp} />)
+        expect(toJson(wrapper)).toMatchSnapshot()
     })
 
     it('renders empty given no tabs', () => {
         const wrapper = shallow(<Tabs />)
         expect(toJson(wrapper)).toMatchSnapshot()
+    })
+
+    it('closes the first tab and opens any clicked tab', () => {
+        const wrapper = shallow(<Tabs tabs={tabsProp} />)
+        wrapper.find('button').at(1).simulate('click')
+        expect(toJson(wrapper)).toMatchSnapshot()
+
+        // console.log('>>> WRAPPER <<<')
+        // console.log(wrapper.debug())
+        // console.log('>>> FIND(BUTTON) <<<')
+        // console.log(wrapper.find('button').debug())
     })
 })
