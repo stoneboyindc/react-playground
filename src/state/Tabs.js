@@ -44,7 +44,7 @@ class Tabs extends React.Component {
         return (
             <div>
                 {this.renderButtons()}
-                {this.props.tabs.length && this.renderContent()}
+                {this.props.tabs.length !== 0 && this.renderContent()}
             </div>
         )
     }
